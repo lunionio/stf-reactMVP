@@ -1,142 +1,27 @@
 import React, { Component } from "react";
-import { Platform, View } from "react-native";
-import {
-  createDrawerNavigator,
-  createStackNavigator,
-  createTabNavigator
-} from "react-navigation";
+import { View } from "react-native";
+import { createStackNavigator } from "react-navigation";
 import styled from "styled-components/native";
 import { connect } from "react-redux";
-import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import WelcomeScreen from "../screens/Welcome";
-import OportunidadesScreen from "../screens/Oportunidades";
-import AgendaScreen from "../screens/Agenda";
-import HistoricoScreen from "../screens/Historico";
-import ConfiguracoesScreen from "../screens/Configuracoes";
-import { HamburgerIcon, BackIcon } from "../components/icons";
+import DadosBancariosScreen from "../screens/DadosBancarios";
 import WorkPopUp from "../components/WorkPopUp";
 import workActions from "../actions/workActions/actions";
-import { CustomDrawerContent } from "../components";
-import { colors } from "../utils/constants";
-
-const TabNav = createTabNavigator(
-  {
-    Novidades: {
-      screen: OportunidadesScreen,
-      navigationOptions: ({ navigation }) => ({
-        tabBarLabel: "Novas Oportunidades",
-        tabBarIcon: ({ tintColor }) =>
-          <FontAwesome
-            name="external-link-square"
-            size={25}
-            color={tintColor}
-          />
-      })
-    },
-    Agenda: {
-      screen: AgendaScreen,
-      navigationOptions: ({ navigation }) => ({
-        tabBarLabel: "Minha Agenda",
-        tabBarIcon: ({ tintColor }) =>
-          <FontAwesome name="calendar" size={25} color={tintColor} />
-      })
-    },
-    Historico: {
-      screen: HistoricoScreen,
-      navigationOptions: ({ navigation }) => ({
-        tabBarLabel: "Meu Historico",
-        tabBarIcon: ({ tintColor }) =>
-          <FontAwesome name="book" size={25} color={tintColor} />
-      })
-    }
-  },
-  {
-    tabBarOptions: {
-      activeTintColor: colors.BASE,
-      inactiveTintColor: colors.BLACK,
-      inactiveBackgroundColor: colors.WHITE,
-      activeBackgroundColor: colors.WHITE,
-      showIcon: true,
-      showLabel: Platform.OS === "ios",
-      indicatorStyle: {
-        backgroundColor: colors.BASE
-      },
-      style: {
-        backgroundColor: colors.WHITE
-      },
-      upperCaseLabel: false
-    },
-    tabBarPosition: "bottom",
-    swipeEnabled: true,
-    animationEnabled: true
-  }
-);
-
-const Drawer = createDrawerNavigator(
-  {
-    Novidades: {
-      screen: TabNav
-    },
-    Configuracoes: {
-      screen: ConfiguracoesScreen,
-      navigationOptions: ({ navigation }) => ({
-        drawerLabel: "Configurações",
-        drawerIcon: ({ tintColor }) =>
-          <Ionicons name="md-settings" size={23} color={tintColor} />,
-        headerLeft: <BackIcon onPress={() => navigation.goBack()} />
-      })
-    }
-  },
-  {
-    contentComponent: props => <CustomDrawerContent {...props} />,
-    contentOptions: {
-      activeBackgroundColor: colors.WHITE,
-      activeTintColor: colors.BASE,
-      inactiveTintColor: colors.WHITE
-    }
-  }
-);
-
-const DrawerNavigator = createStackNavigator(
-  {
-    DrawerNavigator: {
-      screen: Drawer
-    }
-  },
-  {
-    navigationOptions: ({ navigation }) => ({
-      drawerLabel: "Minha Agenda",
-      drawerIcon: ({ tintColor }) =>
-        <FontAwesome name="calendar" size={25} color={tintColor} />,
-      headerStyle: {
-        backgroundColor: colors.BASE
-      },
-      headerTitle: "Minha Agenda",
-      headerTitleStyle: {
-        color: colors.WHITE
-      },
-      headerLeft: (
-        <HamburgerIcon onPress={() => navigation.navigate("DrawerOpen")} />
-      )
-    }),
-    swipeEnabled: false,
-    animationEnabled: false
-  }
-);
+import StatusBar from "../components/StatusBar";
+import DrawerNavigator from "./DrawerNavigator";
 
 const makeMainNavigator = initialRouteName => {
   return createStackNavigator(
     {
       Welcome: { screen: WelcomeScreen },
+      DadosBancarios: {screen: DadosBancariosScreen},
       Main: {
         screen: DrawerNavigator
       }
     },
     {
-      initialRouteName: initialRouteName,
-      navigationOptions: {
-        header: null
-      }
+      initialRouteName,
+      headerMode: "none"
     }
   );
 };
@@ -144,12 +29,17 @@ const makeMainNavigator = initialRouteName => {
 const MainSafeAreaView = styled.View`flex: 1;`;
 
 class InitialRouteNavigator extends Component {
-  state = {
-    MainNavigator: null
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      MainNavigator: null
+    };
+  }
 
   componentWillMount() {
-    this.setState({ MainNavigator: makeMainNavigator("Welcome") });
+    this.setState({
+      MainNavigator: makeMainNavigator("Welcome")
+    });
   }
 
   render() {
@@ -158,6 +48,7 @@ class InitialRouteNavigator extends Component {
     return (
       <View style={{ flex: 1, elevation: 1, zIndex: 1 }}>
         <MainSafeAreaView>
+          <StatusBar color={"rgb(255, 74, 16)"} />
           {this.props.workData.show &&
             <WorkPopUp
               workData={this.props.workData}

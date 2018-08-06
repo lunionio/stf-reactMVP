@@ -14,21 +14,21 @@ const DrawerContainer = styled.View`
 `;
 
 const AvatarContainer = styled.View`
-  flex: 4;
-  top: 30;
+  flex: 3;
+  top: 10;
   alignItems: center;
   justifyContent: center;
 `;
 
 const Avatar = styled.View`
-  width: 120;
-  height: 120;
-  borderRadius: 60;
+  width: 100;
+  height: 100;
+  borderRadius: 50;
   backgroundColor: ${props => props.theme.WHITE};
 `;
 
 const ItemContainer = styled.View`
-  flex: 6;
+  flex: 8;  
 `;
 
 const ButtonContainer = styled.View`

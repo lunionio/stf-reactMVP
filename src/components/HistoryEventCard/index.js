@@ -184,39 +184,108 @@ const IconButtonInfo = styled.Image`
   resize-mode: contain;
 `;
 
+const getColorByStatus = type => {
+  switch (type) {
+    case "pendente":
+      return "orange";
+    case "pago":
+      return "green";
+    case "recusado":
+      return "red";
+    case "confirmado":
+      return "green";
+  }
+};
+
+const getIconByStatus = type => {
+  switch (type) {
+    case "pendente":
+      return (
+        <InfosIconStatus
+          source={require("../../assets/images/ic_info_alert.png")}
+        />
+      );
+    case "pago":
+      return (
+        <InfosIconStatus
+          source={require("../../assets/images/ic_card_check.png")}
+        />
+      );
+    case "recusado":
+      return (
+        <InfosIconStatus
+          source={require("../../assets/images/ic_cancel.png")}
+        />
+      );
+    case "confirmado":
+      return (
+        <InfosIconStatus
+          source={require("../../assets/images/ic_card_check.png")}
+        />
+      );
+  }
+};
+
 class HistoryEventCard extends Component {
   render() {
+    const {
+      data: { date, name, address, hour, job, value, status }
+    } = this.props;
     return (
       <Content>
         <ItemContentLeftIndicator />
         <ItemContainer>
           <ItemContent>
             <ItemContentData>
-              <TextLabel fontSize={24} color={"red"} label={"TER"} />
-              <TextLabel fontSize={24} color={"black"} label={"03"} />
-              <TextLabel fontSize={24} color={"red"} label={"SET"} />
+              <TextLabel
+                fontSize={24}
+                color={"red"}
+                label={date && date.substring(0, 3)}
+              />
+              <TextLabel
+                fontSize={24}
+                color={"black"}
+                label={date && date.substring(4, 6)}
+              />
+              <TextLabel
+                fontSize={24}
+                color={"red"}
+                label={date && date.substring(7, 10)}
+              />
             </ItemContentData>
             <ItemContainerInfos>
-              <TextLabel fontSize={23} color={"red"} label={"TITULO_EVENTO"} />
+              <TextLabel fontSize={23} color={"red"} label={name && name} />
               <ItemContentInfos>
                 <InfosContent>
                   <InfosItem>
                     <InfosIcon
                       source={require("../../assets/images/ic_location.png")}
                     />
-                    <TextLabel fontSize={12} color={"black"} label={"LOCAL"} />
+                    <TextLabel
+                      fontSize={12}
+                      color={"black"}
+                      label={address && address}
+                    />
                   </InfosItem>
                   <InfosItem>
                     <InfosIcon
                       source={require("../../assets/images/ic_clock.png")}
                     />
-                    <TextLabel fontSize={12} color={"black"} label={"HORA"} />
+                    <TextLabel
+                      fontSize={12}
+                      color={"black"}
+                      label={hour && hour}
+                    />
                   </InfosItem>
                   <InfosItem>
                     <InfosIcon
                       source={require("../../assets/images/ic_money.png")}
                     />
-                    <TextLabel fontSize={12} color={"black"} label={"VALOR"} />
+                    <TextLabel
+                      fontSize={12}
+                      color={"black"}
+                      label={value && value}
+                    />
                   </InfosItem>
                 </InfosContent>
                 <ImageContainer>
@@ -228,7 +297,11 @@ class HistoryEventCard extends Component {
                     </ImageContent>
                   </ImageInfoContent>
                   <ImageTextContent>
-                    <TextLabel fontSize={14} color={"black"} label={"ICON"} />
+                    <TextLabel
+                      fontSize={14}
+                      color={"black"}
+                      label={job && job}
+                    />
                   </ImageTextContent>
                 </ImageContainer>
               </ItemContentInfos>
@@ -237,13 +310,11 @@ class HistoryEventCard extends Component {
           <ContentStatusText>
             <TextLabel
               fontSize={14}
-              color={"green"}
+              color={status && getColorByStatus(status)}
               fontWeight={"bold"}
-              label={"CONFIRMADO"}
+              label={status && status.toUpperCase()}
             />
-            <InfosIconStatus
-              source={require("../../assets/images/ic_card_check.png")}
-            />
+            {status && getIconByStatus(status)}
           </ContentStatusText>
         </ItemContainer>
         <ItemContentRightButton>

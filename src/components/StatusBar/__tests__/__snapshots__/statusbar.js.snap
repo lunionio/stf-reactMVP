@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Components - StatusBar renders correctly 1`] = `
+<View
+  color="white"
+  style={
+    Array [
+      Object {
+        "backgroundColor": "white",
+        "elevation": 6,
+        "height": 20,
+        "zIndex": 6,
+      },
+      undefined,
+    ]
+  }
+/>
+`;
+
+exports[`Components - StatusBar renders correctly 2`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#ffffff",
+        "elevation": 1,
+        "height": 20,
+        "zIndex": 1,
+      },
+      undefined,
+    ]
+  }
+/>
+`;

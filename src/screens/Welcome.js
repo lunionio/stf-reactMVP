@@ -2,18 +2,23 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Alert } from "react-native";
 import styled from "styled-components/native";
-import { FormattedWrapper, FormattedMessage } from "react-native-globalize";
 import { Button } from "../components";
-import messages from "../Messages";
 import Spacer from "../components/Spacer";
 import TextLabel from "../components/TextLabel";
 import FacebookButton from "../components/FacebookButton";
-import IconSvg from "../lib/RenderIcon";
+import { PasswordEyeIcon } from "../components/icons";
+
 
 const loginMock = {
   username: "padilha",
   password: "1234"
 };
+
+const Container = styled.View`
+  flex: 1;
+  align-items: center;
+  background: #ffffff;
+`;
 
 const ContainerView = styled.View`
   flex: 1;
@@ -51,6 +56,7 @@ const TitleText = styled.Text`
   font-size: 30;
   color: #000;
 `;
+
 
 const InputTextContainer = styled.View`
   flex: 1;
@@ -126,18 +132,15 @@ const ButtonContainer = styled.View``;
 
 class WelcomeScreen extends Component {
   state = {
-    username: null,
-    password: null
+    username: "padilha",
+    password: "1234"
   };
 
   render() {
     const { username, password } = this.state;
 
     return (
-      <FormattedWrapper
-        locale={this.props.curState.Language.language}
-        messages={messages}
-      >
+      <Container>
         <ContainerBackground>
           <BackgroundImage
             source={require("../assets/images/login_background.png")}
@@ -178,9 +181,7 @@ class WelcomeScreen extends Component {
                 secureTextEntry={true}
                 onChangeText={text => this.setState({ password: text })}
               />
-              <Icon
-                source={require(".././assets/images/ic_password_protector.png")}
-              />
+             <PasswordEyeIcon />
             </InputTextContent>
             <Spacer min={20} max={20} />
             <ButtonContainer>
@@ -222,7 +223,7 @@ class WelcomeScreen extends Component {
             </AccountCreationContentSpacer>
           </AccountCreationContent>
         </ContainerView>
-      </FormattedWrapper>
+      </Container>
     );
   }
 }
