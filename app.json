@@ -7,20 +7,24 @@
     "sdkVersion": "25.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
-    "primaryColor": "#cccccc",
-    "icon": "./assets/icons/app.png",
-    "loading": {
-      "icon": "./assets/icons/loading.png",
-      "hideExponentText": false
+    "primaryColor": "#ffffff",
+    "icon": "./assets/icons/icon.png",    
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "backgroundColor": "#FF4900"
     },
     "packagerOpts": {
       "assetExts": ["ttf", "mp4"]
     },
+    "androidStatusBar": {     
+      "barStyle": "light-content",  
+      "backgroundColor": "#FF4910"
+    },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false
     },
     "android": {
-      "package": "com.staffpro.staffpro"
+      "package": "br.com.staffpro"
     }
   }
 }

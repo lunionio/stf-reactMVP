@@ -4,7 +4,9 @@ import styled from "styled-components";
 import { EventCard } from "../components/";
 import { connect } from "react-redux";
 
-const Content = styled.View``;
+const Content = styled.View`
+background: #ffffff;
+`;
 
 class OportunidadesScreen extends Component {
   render() {
