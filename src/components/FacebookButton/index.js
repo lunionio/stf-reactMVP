@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import TextLabel from "../TextLabel";
 import Icon from "../../lib/RenderIcon";
+import {FacebookLogin} from '../../services';
 
 const TouchableOpacity = styled.TouchableOpacity`
   max-height: 56;
@@ -35,7 +36,7 @@ const Content = styled.View`
 
 const FacebookButton = () => {
   return (
-    <TouchableOpacity onPress={() => {}}>
+    <TouchableOpacity onPress={FacebookLogin}>
       <Container>
         <Content>
           <Icon name="facebookLogo" />

@@ -4,10 +4,10 @@ import AgendaScreen from "../screens/Agenda";
 import HistoricoScreen from "../screens/Historico";
 import { FontAwesome } from "@expo/vector-icons";
 import { Platform } from "react-native";
-import { createTabNavigator } from "react-navigation";
+import { createBottomTabNavigator } from "react-navigation";
 import React from "react";
 
-const TabNav = createTabNavigator(
+const TabNav = createBottomTabNavigator(
   {
     Novidades: {
       screen: OportunidadesScreen,
@@ -56,8 +56,8 @@ const TabNav = createTabNavigator(
       upperCaseLabel: false
     },
     tabBarPosition: "bottom",
-    swipeEnabled: true,
-    animationEnabled: true
+    swipeEnabled: Platform.OS !== "ios",
+    animationEnabled: Platform.OS !== "ios"
   }
 );
 

@@ -10,7 +10,7 @@ const IconLeftContainer = styled.TouchableOpacity`
 
 const Back = ({ onPress }) => (
   <IconLeftContainer onPress={onPress}>
-    <Ionicons name="md-arrow-back" size={25} color="white" />
+    <Ionicons name="ios-arrow-back" size={30} color="white" />
   </IconLeftContainer>
 );
 

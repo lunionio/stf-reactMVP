@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { StatusBar, Platform } from "react-native";
 import { Provider, connect } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import styled from "styled-components/native";
@@ -13,6 +14,11 @@ import { colors } from "./utils/constants";
 const Root = styled.View`
   flex: 1;
   background-color: ${props => props.theme.WHITE};
+`;
+
+const StatusBarAndroid = styled.View`
+  height: 24;
+  background-color: ${props => props.theme.BASE};
 `;
 
 class RootContainer extends Component {

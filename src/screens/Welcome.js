@@ -1,3 +1,4 @@
+import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Alert } from "react-native";
@@ -6,8 +7,9 @@ import { Button } from "../components";
 import Spacer from "../components/Spacer";
 import TextLabel from "../components/TextLabel";
 import FacebookButton from "../components/FacebookButton";
-import { PasswordEyeIcon } from "../components/icons";
-
+import {colors} from '../utils/constants'
+import recoveryPasswordActions from "../actions/recoveryPasswordActions/actions";
+import { recoveryPasswordHelper } from "../lib/recoveryPasswordHelper";
 
 const loginMock = {
   username: "padilha",
@@ -66,6 +68,7 @@ const InputTextContainer = styled.View`
   min-width: 80%;
   max-width: 80%;
   min-height: 45%;
+  height: 45%;
   max-height: 45%;
   background-color: white;
   overflow: hidden;
@@ -90,7 +93,7 @@ const InputTextContent = styled.View`
   padding-left: 15;
   padding-right: 15;
   border-width: 1;
-  border-color: #000;
+  border-color: #a7a7a7;
   border-radius: 25;
 `;
 
@@ -126,15 +129,33 @@ const AccountCreationContent = styled.View`
   flex-direction: row;
 `;
 
+const IconRightContainer = styled.TouchableOpacity``;
+const RecoveryContainer = styled.TouchableOpacity``;
+
+
 const AccountCreationContentSpacer = styled.View`margin-left: 15;`;
 
 const ButtonContainer = styled.View``;
 
 class WelcomeScreen extends Component {
+  constructor()
+  {
+    super();
+ 
+    this.state = { hidePassword: true }
+  }
+
+ 
   state = {
     username: "padilha",
     password: "1234"
   };
+
+  managePasswordVisibility = () => {
+    this.setState({
+      hidePassword: !this.state.hidePassword
+    })
+  }
 
   render() {
     const { username, password } = this.state;
@@ -152,36 +173,35 @@ class WelcomeScreen extends Component {
           <Spacer min={5} max={5} />
           <InputTextContainer>
             <Spacer min={5} max={5} />
-            <InputTextContent>
-              <Icon
-                source={require(".././assets/images/ic_login_username.png")}
-              />
+            <InputTextContent>            
+            <FontAwesome name="user-o" size={25} color="#a7a7a7" />      
               <InputText
-                placeholderTextColor={"red"}
+                placeholderTextColor={colors.BASE}
                 placeholder="email@email.com"
                 multiline={false}
                 numberOfLines={1}
                 underlineColorAndroid="transparent"
                 autoCapitalize={"none"}
+                
                 onChangeText={text => this.setState({ username: text })}
               />
             </InputTextContent>
-            <Spacer min={15} max={15} />
+            <Spacer min={15} max={15} />            
             <InputTextContent>
-              <Icon
-                source={require(".././assets/images/ic_login_password.png")}
-              />
+            <Ionicons name="md-key" size={25} color="#a7a7a7" />              
               <InputText
-                placeholderTextColor={"red"}
+                placeholderTextColor={colors.BASE}
                 placeholder="senha"
                 multiline={false}
                 numberOfLines={1}
                 underlineColorAndroid="transparent"
                 autoCapitalize={"none"}
-                secureTextEntry={true}
+               secureTextEntry = { this.state.hidePassword }
                 onChangeText={text => this.setState({ password: text })}
               />
-             <PasswordEyeIcon />
+            <IconRightContainer onPress = { this.managePasswordVisibility }>
+               <Ionicons name={ ( this.state.hidePassword ) ? "md-eye" : "md-eye-off" } size={25} color="#a7a7a7" />
+            </IconRightContainer>
             </InputTextContent>
             <Spacer min={20} max={20} />
             <ButtonContainer>
@@ -195,11 +215,15 @@ class WelcomeScreen extends Component {
               />
             </ButtonContainer>
             <Spacer min={20} max={20} />
+            <RecoveryContainer onPress={() => {
+              recoveryPasswordHelper.recovery(this.props.recoveryPasswordActions);
+            }}>
             <TextLabel
               fontSize={14}
               color={"rgba(0,0,0,0.5)"}
               label={"Esqueceu sua senha?"}
             />
+            </RecoveryContainer>
             <Spacer min={5} max={5} />
           </InputTextContainer>
           <Spacer min={15} max={15} />
@@ -227,9 +251,18 @@ class WelcomeScreen extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    recoveryPasswordData: state.recoveryPasswordData
+  };
+};
 
-const mapStateToProps = state => ({
-  curState: state
-});
+const mapDispatchToProps = dispatch => {
+  return {
+    recoveryPasswordActions: type => dispatch(recoveryPasswordActions(type))
+  };
+};
 
-export default connect(mapStateToProps, {})(WelcomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  WelcomeScreen
+);

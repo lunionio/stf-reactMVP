@@ -4,6 +4,7 @@ import { StyleSheet, View } from "react-native";
 import { Agenda, LocaleConfig } from "react-native-calendars";
 import HistoryEventCard from "../components/HistoryEventCard";
 import Spacer from "../components/Spacer";
+import TextLabel from "../components/TextLabel";
 
 LocaleConfig.locales['br'] = {
   monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
@@ -98,9 +99,13 @@ class AgendaScreen extends Component {
               }}          
               renderItem={this.renderItem.bind(this)}
               renderEmptyDate={() => {
-                return <View />;
+                return  (<TextLabel
+                color={"black"}               
+                fontSize={15}
+                label={"Nenhum evento registrado nessa data"}
+                />);
               }}
-              hideKnob={true}
+              hideKnob={false}
               selected={"2018-08-05"}
               theme={{
                 calendarBackground: "#ff4910",

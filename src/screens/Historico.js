@@ -6,7 +6,7 @@ import TextLabel from "../components/TextLabel";
 
 const itemDateMock = [
   {
-    name: "Aniversario Otavio",
+    name: "show do pericles",
     hour: "21:30",
     address: "São Paulo",
     value: 150.0,
@@ -15,16 +15,7 @@ const itemDateMock = [
     status: "pago"
   },
   {
-    name: "Aniversario Ana Paula",
-    hour: "20:30",
-    address: "São Paulo",
-    value: 120.0,
-    job: "Cozinheiro",
-    date: "SAB 04 AGO",
-    status: "pago"
-  },
-  {
-    name: "Casamento Priscila",
+    name: "show do thiaguinho",
     hour: "22:30",
     address: "São Paulo",
     value: 250.0,
@@ -33,7 +24,7 @@ const itemDateMock = [
     status: "pendente"
   },
   {
-    name: "Show 1",
+    name: "show do thiaguinho 2",
     hour: "22:40",
     address: "São Paulo",
     value: 350.0,
@@ -317,7 +308,7 @@ class HistoricoScreen extends Component {
                   <TextLabel
                     fontSize={10}
                     label={"VALOR RECEBIDO"}
-                    color={"white"}
+                    color={"black"}
                   />
                   <Spacer min={5} max={5} />
                   <TextLabel
@@ -335,7 +326,7 @@ class HistoricoScreen extends Component {
                   <TextLabel
                     fontSize={10}
                     label={"VALOR RECEBIDO"}
-                    color={"white"}
+                    color={"black"}
                   />
                   <Spacer min={5} max={5} />
                   <TextLabel

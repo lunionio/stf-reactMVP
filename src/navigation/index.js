@@ -3,24 +3,58 @@ import { View } from "react-native";
 import { createStackNavigator } from "react-navigation";
 import styled from "styled-components/native";
 import { connect } from "react-redux";
-import WelcomeScreen from "../screens/Welcome";
-import DadosBancariosScreen from "../screens/DadosBancarios";
+import {
+  AgendaScreen,
+  AjudaScreen,
+  AreaAtuacaoScreen,
+  CadastroScreen,
+  CurriculoScreen,
+  DadosBancariosScreen,
+  DetalhesScreen,
+  FaleConoscoScreen,
+  FormacaoAcademicaScreen,
+  HistoricoScreen,
+  LoginScreen,
+  MeusDocumentosScreen,
+  OportunidadesScreen,
+  PerfilScreen,
+  PerfilDetalhesScreen,
+  NotificacoesScreen,
+  RedefinirSenhaScreen
+} from "../screens";
 import WorkPopUp from "../components/WorkPopUp";
 import workActions from "../actions/workActions/actions";
+import RecoveryPopUp from "../components/RecoveryPopUp";
+import recoveryPasswordActions from "../actions/recoveryPassword/actions";
 import StatusBar from "../components/StatusBar";
 import DrawerNavigator from "./DrawerNavigator";
 
 const makeMainNavigator = initialRouteName => {
   return createStackNavigator(
     {
-      Welcome: { screen: WelcomeScreen },
-      DadosBancarios: {screen: DadosBancariosScreen},
+      Agenda: { screen: AgendaScreen },
+      Ajuda: { screen: AjudaScreen },
+      AreaAtuacao: { screen: AreaAtuacaoScreen },
+      Cadastro: { screen: CadastroScreen },
+      Curriculo: { screen: CurriculoScreen },
+      DadosBancarios: { screen: DadosBancariosScreen },
+      Detalhe: { screen: DetalhesScreen },
+      FaleConosco: { screen: FaleConoscoScreen },
+      FormacaoAcademica: { screen: FormacaoAcademicaScreen },
+      Historico: { screen: HistoricoScreen },
+      Login: { screen: LoginScreen },
+      MeusDocumentos: { screen: MeusDocumentosScreen },
+      Oportunidades: { screen: OportunidadesScreen },
+      Perfil: { screen: PerfilScreen },
+      PerfilDetalhes: { screen: PerfilDetalhesScreen },
+      Notificacoes: { screen: NotificacoesScreen },
+      RedefinirSenha: {screen: RedefinirSenhaScreen},
       Main: {
         screen: DrawerNavigator
       }
     },
     {
-      initialRouteName,
+      initialRouteName: initialRouteName,
       headerMode: "none"
     }
   );
@@ -38,7 +72,7 @@ class InitialRouteNavigator extends Component {
 
   componentWillMount() {
     this.setState({
-      MainNavigator: makeMainNavigator("Welcome")
+      MainNavigator: makeMainNavigator("Login")
     });
   }
 
@@ -47,13 +81,20 @@ class InitialRouteNavigator extends Component {
 
     return (
       <View style={{ flex: 1, elevation: 1, zIndex: 1 }}>
-        <MainSafeAreaView>
+       <MainSafeAreaView>
           <StatusBar color={"rgb(255, 74, 16)"} />
           {this.props.workData.show &&
             <WorkPopUp
               workData={this.props.workData}
               workActions={this.props.workActions}
             />}
+
+            {this.props.recoveryPasswordData.show &&
+            <RecoveryPopUp
+            recoveryPasswordData={this.props.recoveryPasswordData}
+            recoveryPasswordActions={this.props.recoveryPasswordActions}
+            />
+            }
           <MainNavigator />
         </MainSafeAreaView>
       </View>
@@ -63,13 +104,15 @@ class InitialRouteNavigator extends Component {
 
 const mapStateToProps = state => {
   return {
-    workData: state.workData
+    workData: state.workData,
+    recoveryPasswordData: state.recoveryPasswordData
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    workActions: type => dispatch(workActions(type))
+    workActions: type => dispatch(workActions(type)),
+    recoveryPasswordActions: type => dispatch(recoveryPasswordActions(type))
   };
 };
 

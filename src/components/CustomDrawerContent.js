@@ -31,12 +31,6 @@ const ItemContainer = styled.View`
   flex: 8;  
 `;
 
-const ButtonContainer = styled.View`
-  flex: 2;
-  justifyContent: center;
-  alignItems: center;
-`;
-
 const CustomDrawerContent = (props) => (
   <ContainerView>
     <DrawerContainer>

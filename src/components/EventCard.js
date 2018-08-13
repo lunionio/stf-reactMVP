@@ -140,35 +140,64 @@ const ImageButton = styled.Image`
 
 class EventCard extends Component {
   render() {
+    const {
+      navigate,
+      data: { date, name, address, hour, job, value, status }
+    } = this.props;
+
     return (
       <Content>
         <ItemContent>
           <ItemContentData>
-            <TextLabel fontSize={24} color={"red"} label={"TER"} />
-            <TextLabel fontSize={24} color={"black"} label={"03"} />
-            <TextLabel fontSize={24} color={"red"} label={"SET"} />
+            <TextLabel
+              fontSize={24}
+              color={"red"}
+              label={date && date.substring(0, 3)}
+            />
+            <TextLabel
+              fontSize={24}
+              color={"black"}
+              label={date && date.substring(4, 6)}
+            />
+            <TextLabel
+              fontSize={24}
+              color={"red"}
+              label={date && date.substring(7, 10)}
+            />
           </ItemContentData>
           <ItemContainerInfos>
-            <TextLabel fontSize={23} color={"red"} label={"TITULO_EVENTO"} />
+            <TextLabel fontSize={23} color={"red"} label={name && name} />
             <ItemContentInfos>
               <InfosContent>
                 <InfosItem>
                   <InfosIcon
                     source={require(".././assets/images/ic_location.png")}
                   />
-                  <TextLabel fontSize={12} color={"black"} label={"LOCAL"} />
+                  <TextLabel
+                    fontSize={12}
+                    color={"black"}
+                    label={address && address}
+                  />
                 </InfosItem>
                 <InfosItem>
                   <InfosIcon
                     source={require(".././assets/images/ic_clock.png")}
                   />
-                  <TextLabel fontSize={12} color={"black"} label={"HORA"} />
+                  <TextLabel
+                    fontSize={12}
+                    color={"black"}
+                    label={hour && hour}
+                  />
                 </InfosItem>
                 <InfosItem>
                   <InfosIcon
                     source={require(".././assets/images/ic_money.png")}
                   />
-                  <TextLabel fontSize={12} color={"black"} label={"VALOR"} />
+                  <TextLabel
+                    fontSize={12}
+                    color={"black"}
+                    label={value && value}
+                  />
                 </InfosItem>
               </InfosContent>
               <ImageContainer>
@@ -178,7 +207,7 @@ class EventCard extends Component {
                   </ImageContent>
                 </ImageInfoContent>
                 <ImageTextContent>
-                  <TextLabel fontSize={14} color={"black"} label={"ICON"} />
+                  <TextLabel fontSize={14} color={"black"} label={job && job} />
                 </ImageTextContent>
               </ImageContainer>
             </ItemContentInfos>
@@ -202,7 +231,9 @@ class EventCard extends Component {
               />
             </ButtonContent>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => console.log("bla")}>
+          <TouchableOpacity
+            onPress={() => navigate("Detalhe", { item: this.props.data })}
+          >
             <ButtonContent>
               <ImageButton
                 source={require(".././assets/images/botao_mais_info.png")}

@@ -1,122 +1,197 @@
 import React, { Component } from "react";
-import styled from "styled-components";
-import { connect } from "react-redux";
-import {TextLabel, Spacer} from "../components";
-import { ListItem, Button, Icon } from 'react-native-elements';
+import styled from "styled-components/native";
+import TextLabel from "../components/TextLabel";
+import Spacer from "../components/Spacer";
+import {colors} from "../utils/constants";
+import { Ionicons } from '@expo/vector-icons';
+import { ScrollView } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
 
-const Content = styled.View`
-background: #ffffff;
+
+
+const Container = styled.View`
+  flex: 1;
+  margin-left: 20px;
+  margin-right: 20px;
+`;
+
+const ItemContent = styled.View`
+  flex: 1;
+  width: 100%;
+  height: 35;
+  max-height: 35;
+  border-top-width: 1px;
+  border-top-color: #9d9d9d;
+  padding-bottom: 10; 
+  padding-top: 10; 
+`;
+
+const ImageContent = styled.View`
+  flex: 1;
+  width: 100%;
+  height: 35;
+  max-height: 35;
+  justify-content: center;
+  align-items: flex-end;
+  position: absolute;
+`;
+
+const Image = styled.Image`
+  flex: 1;
+  min-width: 15;
+  min-height: 15;
+  max-width: 15;
+  max-height: 15;
+  resize-mode: contain;
+`;
+
+const ItemTextContent = styled.View`
+  flex: 1;
+  width: 100%;
+  height: 35;
+  max-height: 35;
+  justify-content: center;
+  align-items: flex-start;
+`;
+
+const TouchableOpacity = styled.TouchableOpacity`
+  flex: 1;
+  width: 100%;
+  height: 35;
+  max-height: 35;
+`;
+
+const ButtonExit = styled.TouchableOpacity`
 flex: 1;
-padding-top: 10;
-flex-direction: column;
-padding-left: 20;
-padding-right:20;
-justify-content: flex-start;
-align-items: flex-start;
-`;
-const ContainerListiew = styled.View`
-  margin-top:10;    
-  min-width: 100%; 
-  max-width: 100%;  
-`;
-
-const ContainerButton = styled.View`
+flex-direction: row;
 margin-top:30;
-align-self: center;
+width: 100%;
+justify-content: center;
+align-items: center; 
 `
-const ButtonSair = styled.View`
-background: "transparent",
-width: 300,
-border-color: "transparent"   
-`;
-
-const list = [
-  {
-    title: 'Perfil'    
-  },
-  {
-    title: 'Área de atuação'   
-  },
-  {
-    title: 'Dados bancários'   
-  },
-  {
-    title: 'Documentação'   
-  },
-  {
-    title: 'Currículo'   
-  },
-  {
-    title: 'Formação acadêmica'   
-  },
-  {
-    title: 'Redefinir senha'   
-  }
-]
 
 class PerfilScreen extends Component {
-  
   render() {
-    const { navigate } = this.props.navigation;
+
     return (
-      <Content>       
-           <TextLabel fontWeight={800} textAling={'flex-start'} fontSize={28} color={"#000000"} label={"CONTA"} />
-      <ContainerListiew>
-        {
-          list.map((item, i) => (
-            <ListItem
-              key={i}
-              title={item.title}
-              onPress={() =>
-                navigate('DadosBancarios') // TODO adicionar as outras telas
-              }
-            />
-          ))
-        }
-      </ContainerListiew>
-      <Spacer min={30} max={30}/>
-      <TextLabel fontWeight={800} textAling={'flex-start'} fontSize={28} color={"#000000"} label={"PREFERÊNCIAS"} />
-      <ContainerListiew>
-      <ListItem
-              key={1}
-              title="Notificações"
-              onPress={() =>
-                navigate('Welcome') // TODO adicionar as outras telas
-              }
-            />
-      </ContainerListiew>
-      <ContainerButton>
-        <Button
-        buttonStyle={ButtonSair}
-        icon={
-          <Icon
-            name='exit'
-            size={15}
-            color='#000000'
-          />
-        }
-        title='Sair'
-      />
-      </ContainerButton>
-      
-      </Content>
-      
+      <ScrollView>
+      <Container>        
+        <Spacer min={10} max={10} />
+        <TextLabel fontWeight={"bold"} fontSize={30} label={"CONTA"} />
+        <Spacer min={10} max={10} />
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate("PerfilDetalhes")}
+        >
+          <ItemContent>
+            <ImageContent>
+              <Ionicons name="ios-arrow-forward" size={30} color={colors.BASE} />
+            </ImageContent>
+            <ItemTextContent>
+              <TextLabel fontSize={20} label={"Editar Perfil"} />
+            </ItemTextContent>
+          </ItemContent>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate("AreaAtuacao")}
+        >
+          <ItemContent>
+            <ImageContent>
+              <Ionicons name="ios-arrow-forward" size={30} color={colors.BASE} />
+            </ImageContent>
+            <ItemTextContent>
+              <TextLabel fontSize={20} label={"Área de atuação"} />
+            </ItemTextContent>
+          </ItemContent>
+        </TouchableOpacity>      
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate("DadosBancarios")}
+        >
+          <ItemContent>
+            <ImageContent>
+              <Ionicons name="ios-arrow-forward" size={30} color={colors.BASE} />
+            </ImageContent>
+            <ItemTextContent>
+              <TextLabel fontSize={20} label={"Dados bancários"} />
+            </ItemTextContent>
+          </ItemContent>
+        </TouchableOpacity>      
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate("MeusDocumentos")}
+        >
+          <ItemContent>
+            <ImageContent>
+              <Ionicons name="ios-arrow-forward" size={30} color={colors.BASE} />
+            </ImageContent>
+            <ItemTextContent>
+              <TextLabel fontSize={20} label={"Documentação"} />
+            </ItemTextContent>
+          </ItemContent>
+        </TouchableOpacity>      
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate("Curriculo")}
+        >
+          <ItemContent>
+            <ImageContent>
+              <Ionicons name="ios-arrow-forward" size={30} color={colors.BASE} />
+            </ImageContent>
+            <ItemTextContent>
+              <TextLabel fontSize={20} label={"Currículo"} />
+            </ItemTextContent>
+          </ItemContent>
+        </TouchableOpacity>      
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate("FormacaoAcademica")}
+        >
+          <ItemContent>
+            <ImageContent>
+              <Ionicons name="ios-arrow-forward" size={30} color={colors.BASE} />
+            </ImageContent>
+            <ItemTextContent>
+              <TextLabel fontSize={20} label={"Formação acadêmica"} />
+            </ItemTextContent>
+          </ItemContent>
+        </TouchableOpacity>      
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate("RedefinirSenha")}
+        >
+          <ItemContent>
+            <ImageContent>
+              <Ionicons name="ios-arrow-forward" size={30} color={colors.BASE} />
+            </ImageContent>
+            <ItemTextContent>
+              <TextLabel fontSize={20} label={"Redefinir Senha"} />
+            </ItemTextContent>
+          </ItemContent>
+        </TouchableOpacity>      
+        <Spacer min={20} max={20} />
+        <TextLabel fontWeight={"bold"} fontSize={30} label={"PREFERÊNCIAS"} />
+        <Spacer min={10} max={10} />
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate("Notificacoes")}
+        >
+          <ItemContent>
+            <ImageContent>
+              <Ionicons name="ios-arrow-forward" size={30} color={colors.BASE} />
+            </ImageContent>
+            <ItemTextContent>
+              <TextLabel fontSize={20} label={"Notificações"} />
+            </ItemTextContent>
+          </ItemContent>
+        </TouchableOpacity> 
+        <ButtonExit
+          onPress={() => this.props.navigation.navigate("Login")}
+        >         
+        <FontAwesome
+            name="power-off"
+            size={20}
+            color={"#000000"}
+          />          
+          <TextLabel fontSize={20} label={"Sair"} />     
+        </ButtonExit>
+        </Container>    
+        </ScrollView>       
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    info: state.info
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    workActions: type => dispatch(workActions(type))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-  PerfilScreen
-);
+export default PerfilScreen;

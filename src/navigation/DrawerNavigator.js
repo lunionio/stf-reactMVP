@@ -4,16 +4,13 @@ import {
   createStackNavigator,
   DrawerActions
 } from "react-navigation";
-
-import { Ionicons, FontAwesome, MaterialIcons } from "@expo/vector-icons";
-import PerfilScreen from "../screens/Perfil";
-import FaleConoscoScreen from "../screens/FaleConosco";
+import {  Ionicons, FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import { HamburgerIcon, BackIcon } from "../components/icons";
-import { CustomDrawerContent } from "../components";
+import { IconLogo, CustomDrawerContent } from "../components";
+import {PerfilScreen, AjudaScreen, FaleConoscoScreen} from "../screens";
+import {colors} from '../utils/constants';
 import TabNav from "./TabNav";
 import styled from "styled-components/native";
-import { colors } from "../utils/constants";
-import AjudaScreen from "../screens/Ajuda";
 
 const HeaderContent = styled.View`
   flex: 1;
@@ -51,14 +48,6 @@ const HeaderTextContent = styled.View`
   align-items: center;
 `;
 
-const IconLogo = styled.Image`
-  min-width: 110;
-  min-height: 46;
-  max-width: 110;
-  max-height: 46;
-  resize-mode: contain;
-`;
-
 const Drawer = createDrawerNavigator(
   {
     Oportunidades: {
@@ -69,9 +58,8 @@ const Drawer = createDrawerNavigator(
         <FontAwesome
         name="external-link-square"
         size={25}
-        color={tintColor}
-      />,
-        headerLeft: <BackIcon onPress={() => navigation.goBack()} />
+        color={colors.WHITE}
+      />
       })
 
     },
@@ -80,7 +68,7 @@ const Drawer = createDrawerNavigator(
       navigationOptions: ({ navigation }) => ({
         drawerLabel: "Perfil",
         drawerIcon: ({ tintColor }) =>
-          <FontAwesome name="user-o" size={25} color={tintColor} />,
+          <FontAwesome name="user-o" size={25} color={colors.WHITE} />,
         headerLeft: <BackIcon onPress={() => navigation.goBack()} />
       })
     },
@@ -89,7 +77,7 @@ const Drawer = createDrawerNavigator(
       navigationOptions: ({ navigation }) => ({
         drawerLabel: "FaleConosco",
         drawerIcon: ({ tintColor }) =>
-          <MaterialIcons name="email" size={25} color={tintColor} />,
+          <MaterialIcons name="email" size={25} color={colors.WHITE} />,
         headerLeft: <BackIcon onPress={() => navigation.goBack()} />
       })
     },
@@ -98,10 +86,9 @@ const Drawer = createDrawerNavigator(
       navigationOptions: ({ navigation }) => ({
         drawerLabel: "Ajuda",
         drawerIcon: ({ tintColor }) =>
-          <Ionicons name="md-help-circle" size={25} color={tintColor} />,
-        headerLeft: <BackIcon onPress={() => navigation.goBack()} />
+          <Ionicons name="md-help-circle" size={25} color={colors.WHITE} />       
       })
-    }
+    }   
   },
   {
     contentComponent: props => <CustomDrawerContent {...props} />,
@@ -122,12 +109,11 @@ const DrawerNavigator = createStackNavigator(
   {
     headerMode: "screen",
     navigationOptions: ({ navigation }) => ({
+      headerLeft: <BackIcon onPress={() => navigation.goBack()} />,
       header: props =>
         <HeaderContent>
           <HeaderTextContent>
-            <IconLogo
-              source={require(".././assets/images/staffPro_logo.png")}
-            />
+            <IconLogo/>
           </HeaderTextContent>
           <HeaderLogoContent>
             <HamburgerIcon
