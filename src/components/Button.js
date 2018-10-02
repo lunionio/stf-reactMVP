@@ -5,8 +5,7 @@ import styled from "styled-components/native";
 const ButtonContainer = styled.TouchableOpacity`
   width: 130;
   height: 40;
-  backgroundColor: ${props => props.theme.BASE};
-  borderRadius: 25;
+  backgroundColor: #11258A;
   justifyContent: center;
   alignItems: center;
 `;

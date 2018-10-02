@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Alert } from "react-native";
+import { Alert,Text } from "react-native";
 import styled from "styled-components/native";
 import { Button } from "../components";
 import Spacer from "../components/Spacer";
@@ -17,7 +17,7 @@ const loginMock = {
 const Container = styled.View`
   flex: 1;
   align-items: center;
-  background: #ffffff;
+  
 `;
 
 const ContainerView = styled.View`
@@ -45,11 +45,11 @@ const ContainerBackground = styled.View`
 
 const BackgroundImage = styled.Image`
   flex: 1;
-  top: -30%;
   min-width: 110%;
   max-width: 110%;
-  min-height: 80%;
-  max-height: 80%;
+  min-height: 100%;
+  max-height: 100%;
+  height:100%;
 `;
 
 const TitleText = styled.Text`
@@ -67,16 +67,7 @@ const InputTextContainer = styled.View`
   max-width: 80%;
   min-height: 45%;
   max-height: 45%;
-  background-color: white;
   overflow: hidden;
-  border-width: 1;
-  border-bottom-width: 3;
-  border-radius: 15;
-  border-color: #ddd;
-  shadow-color: #000;
-  shadow-offset: {width: 0, height: 2};
-  shadow-opacity: 0.8;
-  shadow-radius: 2;
 `;
 
 const InputTextContent = styled.View`
@@ -87,20 +78,16 @@ const InputTextContent = styled.View`
   align-items: center;
   min-width: 80%;
   max-width: 80%;
-  padding-left: 15;
-  padding-right: 15;
-  border-width: 1;
-  border-color: #000;
-  border-radius: 25;
 `;
 
 const InputText = styled.TextInput`
   flex: 1;
   font-size: 15;
-  min-height: 50;
-  max-height: 50;
-  margin-left: 10;
-  color: red;
+  background: #ffffff;
+  min-height: 40;
+  max-height: 40;
+  color:#000;
+  min-width: 312;
 `;
 
 const Icon = styled.Image`
@@ -112,7 +99,7 @@ const Icon = styled.Image`
 `;
 
 const IconLogo = styled.Image`
-  min-width: 150;
+  min-width: 300;
   min-height: 80;
   max-width: 150;
   max-height: 80;
@@ -143,21 +130,18 @@ class WelcomeScreen extends Component {
       <Container>
         <ContainerBackground>
           <BackgroundImage
-            source={require("../assets/images/login_background.png")}
+            source={require("../assets/images/background.jpg")}
           />
         </ContainerBackground>
         <Spacer min={30} max={30} />
         <ContainerView>
-          <IconLogo source={require(".././assets/images/staffPro_logo.png")} />
-          <Spacer min={5} max={5} />
+          <IconLogo source={require("../assets/images/logo.png")} />
           <InputTextContainer>
-            <Spacer min={5} max={5} />
-            <InputTextContent>
-              <Icon
-                source={require(".././assets/images/ic_login_username.png")}
-              />
+            <InputTextContent  style={{
+              flexDirection: 'column',
+               alignItems: 'flex-start'}}>
+            <Text  style={{marginTop:' '}}>Usuario:</Text>
               <InputText
-                placeholderTextColor={"red"}
                 placeholder="email@email.com"
                 multiline={false}
                 numberOfLines={1}
@@ -167,12 +151,11 @@ class WelcomeScreen extends Component {
               />
             </InputTextContent>
             <Spacer min={15} max={15} />
-            <InputTextContent>
-              <Icon
-                source={require(".././assets/images/ic_login_password.png")}
-              />
+            <InputTextContent style={{
+              flexDirection: 'column',
+               alignItems: 'flex-start'}}>
+            <Text>Senha:</Text>
               <InputText
-                placeholderTextColor={"red"}
                 placeholder="senha"
                 multiline={false}
                 numberOfLines={1}
@@ -181,7 +164,6 @@ class WelcomeScreen extends Component {
                 secureTextEntry={true}
                 onChangeText={text => this.setState({ password: text })}
               />
-             <PasswordEyeIcon />
             </InputTextContent>
             <Spacer min={20} max={20} />
             <ButtonContainer>
@@ -202,26 +184,7 @@ class WelcomeScreen extends Component {
             />
             <Spacer min={5} max={5} />
           </InputTextContainer>
-          <Spacer min={15} max={15} />
-          <TextLabel
-            fontSize={18}
-            color={"rgba(0,0,0,0.5)"}
-            label={"Ou entre com"}
-          />
-          <Spacer min={15} max={15} />
-          <FacebookContainer>
-            <FacebookButton />
-          </FacebookContainer>
-          <AccountCreationContent>
-            <TextLabel
-              fontSize={18}
-              color={"rgba(0,0,0,0.5)"}
-              label={"Não possui uma conta?"}
-            />
-            <AccountCreationContentSpacer>
-              <TextLabel fontSize={18} color={"red"} label={"Crie aqui"} />
-            </AccountCreationContentSpacer>
-          </AccountCreationContent>
+    
         </ContainerView>
       </Container>
     );

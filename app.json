@@ -1,30 +1,30 @@
 {
-  "expo": {
-    "name": "staffpro",
-    "description": "StaffPro",
-    "slug": "staffpro",
-    "privacy": "public",
-    "sdkVersion": "25.0.0",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "primaryColor": "#ffffff",
-    "icon": "./assets/icons/icon.png",    
-    "splash": {
-      "image": "./assets/images/splash.png",
-      "backgroundColor": "#FF4900"
-    },
-    "packagerOpts": {
-      "assetExts": ["ttf", "mp4"]
-    },
-    "androidStatusBar": {     
-      "barStyle": "light-content",  
-      "backgroundColor": "#FF4910"
-    },
-    "ios": {
-      "supportsTablet": false
-    },
-    "android": {
-      "package": "br.com.staffpro"
+    "expo": {
+        "name": "staffpro",
+        "description": "StaffPro",
+        "slug": "staffpro",
+        "privacy": "public",
+        "sdkVersion": "25.0.0",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "primaryColor": "#ffffff",
+        "icon": "./assets/icons/icon.png",
+        "splash": {
+            "Image": "./assets/images/splash.png",
+            "backgroundColor": "#FFFFFF"
+        },
+        "packagerOpts": {
+            "assetExts": ["ttf", "mp4"]
+        },
+        "androidStatusBar": {
+            "barStyle": "light-content",
+            "backgroundColor": "#FFFFFF"
+        },
+        "ios": {
+            "supportsTablet": false
+        },
+        "android": {
+            "package": "br.com.staffpro"
+        }
     }
-  }
 }
