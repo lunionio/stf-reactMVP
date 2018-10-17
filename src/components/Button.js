@@ -3,7 +3,9 @@ import { withTheme } from "styled-components";
 import styled from "styled-components/native";
 
 const ButtonContainer = styled.TouchableOpacity`
-  width: 130;
+  min-width: 90%;
+  max-width: 90%;
+  margin-top : 10;
   height: 40;
   backgroundColor: #11258A;
   justifyContent: center;

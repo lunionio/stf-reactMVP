@@ -21,9 +21,7 @@ const Content = styled.View`
 
 const ItemContent = styled.View`
   flex: 1;
-  min-height: 150;
-  max-height: 150;
-  flex-direction: row;
+  flex-direction: column;
 `;
 
 const ItemContentData = styled.View`
@@ -31,16 +29,14 @@ const ItemContentData = styled.View`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-width: 30%;
-  max-width: 30%;
+  min-width: 50%;
+  max-width: 50%;
   background-color: #ededed;
 `;
 
 const ItemContainerInfos = styled.View`
   flex: 1;
   background-color: #ededed;
-  border-left-width: 2;
-  border-left-color: #9d9d9d;
   margin-top: 10;
   padding-left: 2;
 `;
@@ -54,13 +50,13 @@ const InfosContent = styled.View`
   flex: 1;
   margin-top: 5;
   padding-left: 5;
-  min-width: 60%;
-  max-width: 60%;
+  min-width: 100%;
+  max-width: 100%;
 `;
 
 const InfosItem = styled.View`
   flex: 1;
-  flex-direction: row;
+  flex-direction: column;
   padding-left: 5;
   max-height: 25;
   justify-content: flex-start;
@@ -118,6 +114,8 @@ const ImageTextContent = styled.View`
 
 const FooterButtonContent = styled.View`
   flex: 1;
+  max-width:100%
+  min-width:100%
   background-color: pink;
   flex-direction: row;
 `;
@@ -137,54 +135,34 @@ const ImageButton = styled.Image`
   max-width: 100%;
   max-height: 100%;
 `;
+ 
 
 class EventCard extends Component {
+
+ state = {
+    datas: "01/08/1993",
+    hora: "19:00h",
+    vaga: 'garçon',
+    valor: '150,00'
+  };
+
+
   render() {
+  const { datas, hora,vaga,valor } = this.state;
+
     return (
       <Content>
         <ItemContent>
           <ItemContentData>
-            <TextLabel fontSize={24} color={"red"} label={"TER"} />
-            <TextLabel fontSize={24} color={"black"} label={"03"} />
-            <TextLabel fontSize={24} color={"red"} label={"SET"} />
+            <TextLabel fontSize={12} color={"#707070"} label={"Dia " + datas + " as " + hora} />
+            <TextLabel fontSize={15} color={"#707070"} label={'Vaga de ' + vaga} />
+            <TextLabel fontSize={20} color={"#707070"} label={'R$' + valor} />
           </ItemContentData>
           <ItemContainerInfos>
-            <TextLabel fontSize={23} color={"red"} label={"TITULO_EVENTO"} />
             <ItemContentInfos>
               <InfosContent>
-                <InfosItem>
-                  <InfosIcon
-                    source={require(".././assets/images/ic_location.png")}
-                  />
-                  <TextLabel fontSize={12} color={"black"} label={"LOCAL"} />
-                </InfosItem>
-                <InfosItem>
-                  <InfosIcon
-                    source={require(".././assets/images/ic_clock.png")}
-                  />
-                  <TextLabel fontSize={12} color={"black"} label={"HORA"} />
-                </InfosItem>
-                <InfosItem>
-                  <InfosIcon
-                    source={require(".././assets/images/ic_money.png")}
-                  />
-                  <TextLabel fontSize={12} color={"black"} label={"VALOR"} />
-                </InfosItem>
-              </InfosContent>
-              <ImageContainer>
-                <ImageInfoContent>
-                  <ImageContent>
-                    <Image source={require(".././assets/images/ic_work.png")} />
-                  </ImageContent>
-                </ImageInfoContent>
-                <ImageTextContent>
-                  <TextLabel fontSize={14} color={"black"} label={"ICON"} />
-                </ImageTextContent>
-              </ImageContainer>
-            </ItemContentInfos>
-          </ItemContainerInfos>
-        </ItemContent>
-        <FooterButtonContent>
+                {/*Colocar os botoes aqui :)*/}
+                <FooterButtonContent>
           <TouchableOpacity
             onPress={() => {
               workHelper.openWork(this.props.workActions);
@@ -198,7 +176,6 @@ class EventCard extends Component {
                 textAlign={"center"}
                 fontSize={13}
                 color={"white"}
-                label={`ME${"\n"}CANDIDATAR`}
               />
             </ButtonContent>
           </TouchableOpacity>
@@ -211,11 +188,15 @@ class EventCard extends Component {
                 textAlign={"center"}
                 fontSize={13}
                 color={"white"}
-                label={`MAIS${"\n"}INFORMAÇÕES`}
               />
             </ButtonContent>
           </TouchableOpacity>
         </FooterButtonContent>
+              </InfosContent>
+            </ItemContentInfos>
+          </ItemContainerInfos>
+        </ItemContent>
+        
       </Content>
     );
   }

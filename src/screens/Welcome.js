@@ -53,8 +53,8 @@ const BackgroundImage = styled.Image`
 `;
 
 const TitleText = styled.Text`
-  font-size: 30;
-  color: #000;
+  font-size: 15;
+  color: #5e5e5e;
 `;
 
 
@@ -63,8 +63,8 @@ const InputTextContainer = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 80%;
-  max-width: 80%;
+  min-width: 90%;
+  max-width: 90%;
   min-height: 45%;
   max-height: 45%;
   overflow: hidden;
@@ -74,10 +74,12 @@ const InputTextContent = styled.View`
   flex: 1;
   min-height: 46;
   max-height: 46;
+  margin-top:10;
   flex-direction: row;
   align-items: center;
-  min-width: 80%;
-  max-width: 80%;
+  justify-content: space-between;  
+  min-width: 90%;
+  max-width: 90%;
 `;
 
 const InputText = styled.TextInput`
@@ -87,7 +89,8 @@ const InputText = styled.TextInput`
   min-height: 40;
   max-height: 40;
   color:#000;
-  min-width: 312;
+  min-width: 100%;
+  max-width: 100%;
 `;
 
 const Icon = styled.Image`
@@ -113,6 +116,36 @@ const AccountCreationContent = styled.View`
   flex-direction: row;
 `;
 
+const LoginLogic = (usuario, senha,viewObj) => {
+  objUsuario = { 
+    	"ObjLogin":{
+      "Login":usuario,
+      "Senha":senha,
+      "idCliente":2
+	    }
+   }
+
+  fetch('http://seguranca.mundowebpix.com.br:5300/api/seguranca/Principal/loginUsuario/1/999', {
+  method: 'POST',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(objUsuario),
+    }).then((response) => response.json())
+    .then((responseJson) => {
+      if(responseJson.id != 0){
+        viewObj.props.navigation.navigate("Main")
+      }else{
+        Alert.alert("Usuario ou senha incorretos")
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+
 const AccountCreationContentSpacer = styled.View`margin-left: 15;`;
 
 const ButtonContainer = styled.View``;
@@ -129,8 +162,15 @@ class WelcomeScreen extends Component {
     return (
       <Container>
         <ContainerBackground>
-          <BackgroundImage
-            source={require("../assets/images/background.jpg")}
+          <BackgroundImage style={{
+            minWidth:'100%',
+            minHeight:'100%',
+            maxWidth:'100%',
+            maxHeight:'100%',
+            resizeMode: 'stretch'
+            }}
+            
+            source={require("../assets/images/background.png")}
           />
         </ContainerBackground>
         <Spacer min={30} max={30} />
@@ -140,7 +180,8 @@ class WelcomeScreen extends Component {
             <InputTextContent  style={{
               flexDirection: 'column',
                alignItems: 'flex-start'}}>
-            <Text  style={{marginTop:' '}}>Usuario:</Text>
+            <Text >Usuario:</Text>
+            <Spacer min={5} max={5} />
               <InputText
                 placeholder="email@email.com"
                 multiline={false}
@@ -149,12 +190,14 @@ class WelcomeScreen extends Component {
                 autoCapitalize={"none"}
                 onChangeText={text => this.setState({ username: text })}
               />
+              <Spacer min={30} max={30} />
             </InputTextContent>
             <Spacer min={15} max={15} />
             <InputTextContent style={{
               flexDirection: 'column',
                alignItems: 'flex-start'}}>
             <Text>Senha:</Text>
+            <Spacer min={5} max={5} />
               <InputText
                 placeholder="senha"
                 multiline={false}
@@ -169,19 +212,21 @@ class WelcomeScreen extends Component {
             <ButtonContainer>
               <Button
                 text="ENTRAR"
-                onPress={() =>
-                  username !== loginMock.username ||
-                  password !== loginMock.password
-                    ? Alert.alert("Usuario ou senha incorretos")
-                    : this.props.navigation.navigate("Main")}
+                onPress={() => {LoginLogic(username,password,this)  }}
               />
             </ButtonContainer>
-            <Spacer min={20} max={20} />
+            <Spacer min={40} max={40} />
             <TextLabel
-              fontSize={14}
-              color={"rgba(0,0,0,0.5)"}
-              label={"Esqueceu sua senha?"}
+              fontSize={20}
+              color={"#5e5e5e"}
+              label={"Esqueceu sua senha? CLIQUE AQUI"}
             />
+            <Spacer min={5} max={5} />
+            <TitleText
+              onPress={()=>{ this.props.navigation.navigate("Cadastro") } }
+            >
+              Não possui conta? CLIQUE AQUI
+            </TitleText>
             <Spacer min={5} max={5} />
           </InputTextContainer>
     

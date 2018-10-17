@@ -48,7 +48,7 @@ class InitialRouteNavigator extends Component {
     return (
       <View style={{ flex: 1, elevation: 1, zIndex: 1 }}>
         <MainSafeAreaView>
-          <StatusBar color={"rgb(255, 74, 16)"} />
+          <StatusBar color={"rgb(203, 203, 203)"} />
           {this.props.workData.show &&
             <WorkPopUp
               workData={this.props.workData}

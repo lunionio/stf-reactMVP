@@ -14,6 +14,7 @@ import TabNav from "./TabNav";
 import styled from "styled-components/native";
 import { colors } from "../utils/constants";
 import AjudaScreen from "../screens/Ajuda";
+import CadastroScreen from '../screens/Forms/Cadastro'
 
 const HeaderContent = styled.View`
   flex: 1;
@@ -24,7 +25,7 @@ const HeaderContent = styled.View`
   max-height: 68;
   flex-direction: row;
   align-items: center;
-  background-color: rgb(255, 74, 16);
+  background-color: rgb(203, 203, 203);
   border-bottom-width: 1.7;
   border-bottom-color: rgba(0, 0, 0, 0.2);
 `;
@@ -101,6 +102,9 @@ const Drawer = createDrawerNavigator(
           <Ionicons name="md-help-circle" size={25} color={tintColor} />,
         headerLeft: <BackIcon onPress={() => navigation.goBack()} />
       })
+    },
+    Cadastro: {
+      screen: CadastroScreen
     }
   },
   {
@@ -126,7 +130,7 @@ const DrawerNavigator = createStackNavigator(
         <HeaderContent>
           <HeaderTextContent>
             <IconLogo
-              source={require(".././assets/images/staffPro_logo.png")}
+              source={require(".././assets/images/logo.png")}
             />
           </HeaderTextContent>
           <HeaderLogoContent>
