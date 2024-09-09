@@ -15,7 +15,7 @@
     "react-native-calendars": "^1.19.4",
     "react-native-elements": "^0.19.1",
     "react-native-globalize": "^1.2.3",
-    "react-navigation": "^2.1.0",
+    "react-navigation": "^5.0.0",
     "react-redux": "5.0.7",
     "react-native-svg": "5.5.1",
     "redux": "3.7.2",
